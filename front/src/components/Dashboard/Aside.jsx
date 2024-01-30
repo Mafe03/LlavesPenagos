@@ -1,20 +1,30 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-
+/**
+ * Componente de barra lateral con enlaces de navegación.
+ * @component
+ * @returns {JSX.Element} JSX para renderizar la barra lateral.
+ */
 const Aside = () => {
   return (
     <>
+      {/* Barra lateral */}
       <aside className="sidebar">
         <div className="sidebar-start">
+          {/* Encabezado de la barra lateral */}
           <div className="sidebar-head">
+            {/* Enlace al dashboard con el logo */}
             <a href="/Dashboard" className="logo-wrapper" title="Home">
+              {/* Logo */}
               <span className="sr-only">Home</span>
               <span className="icon logo" aria-hidden="true"></span>
+              {/* Texto del logo */}
               <div className="logo-text">
                 <span className="logo-title">Llaves y Extintores</span>
                 <span className="logo-subtitle">Penagos</span>
               </div>
             </a>
+            {/* Botón de alternar la barra lateral */}
             <button
               className="sidebar-toggle transparent-btn"
               title="Menu"
@@ -24,6 +34,7 @@ const Aside = () => {
               <span className="icon menu-toggle" aria-hidden="true"></span>
             </button>
           </div>
+          {/* Cuerpo de la barra lateral con menú de enlaces */}
           <div className="sidebar-body">
             <ul className="sidebar-body-menu">
               <li>
@@ -65,6 +76,7 @@ const Aside = () => {
             </ul>
           </div>
         </div>
+        {/* Pie de la barra lateral con información del usuario */}
         <div className="sidebar-footer">
           <a href="##" className="sidebar-user">
             <span className="sidebar-user-img">

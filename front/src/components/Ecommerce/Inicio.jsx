@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { NavLink } from "react-bootstrap";
 
+/**
+ * Componente funcional que representa la página de inicio.
+ * @function Inicio
+ * @returns {JSX.Element} JSX que representa la interfaz de usuario de la página de inicio.
+ */
 const Inicio = () => {
   return (
     <>

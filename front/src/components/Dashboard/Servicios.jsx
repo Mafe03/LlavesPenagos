@@ -3,6 +3,16 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import EditarServicio from "./EditarServicio";
 
+/**
+ * Componente para la sección de Servicios.
+ *
+ * @component
+ * @example
+ * // Uso del componente en otro componente o archivo.
+ * import Servicios from './Servicios';
+ * // ...
+ * <Servicios />
+ */
 const Servicios = (props) => {
   const [show2, setShow2] = useState(false);
   const handleClose2 = () => {

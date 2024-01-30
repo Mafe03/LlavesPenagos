@@ -5,7 +5,14 @@ import EditarUser from "./EditarUser";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 
+/**
+ * Componente principal que muestra la lista de usuarios y permite agregar nuevos usuarios.
+ * @component
+ * @param {Object} props - Propiedades del componente.
+ * @returns {JSX.Element} JSX para renderizar la página de inicio.
+ */
 const Inicio = (props) => {
+  // Estado y funciones para el modal de agregar usuario
   const [show2, setShow2] = useState(false);
   const handleClose2 = () => {
     setShow2(false);

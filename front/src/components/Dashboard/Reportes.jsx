@@ -1,5 +1,15 @@
 import React, { useState } from "react";
 
+/**
+ * Componente para la sección de Reportes.
+ *
+ * @component
+ * @example
+ * // Uso del componente en otro componente o archivo.
+ * import Reportes from './Reportes';
+ * // ...
+ * <Reportes />
+ */
 const Reportes = () => {
   return (
     <>

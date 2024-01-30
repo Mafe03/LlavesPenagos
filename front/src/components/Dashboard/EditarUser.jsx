@@ -2,6 +2,14 @@ import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
+/**
+ * Componente para editar un usuario mediante un modal.
+ * @component
+ * @param {Object} props - Propiedades del componente.
+ * @param {boolean} show - Indica si el modal debe mostrarse o no.
+ * @param {function} handleClose - Función para cerrar el modal.
+ * @returns {JSX.Element} JSX para renderizar el modal de edición de usuarios.
+ */
 const EditarUser = (props, show, handleClose) => {
   return (
     <>

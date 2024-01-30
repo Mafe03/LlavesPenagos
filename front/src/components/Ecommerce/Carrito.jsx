@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 
+/**
+ * Componente funcional que representa la página de carrito de compras.
+ * @function Carrito
+ * @returns {JSX.Element} JSX que representa la interfaz de usuario del carrito.
+ */
 
 const Carrito = () => {
   return (

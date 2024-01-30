@@ -3,6 +3,13 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import EditarProducto from "./EditarProducto";
 
+/**
+ * Componente para la gestión de productos.
+ *
+ * @component
+ * @param {object} props - Las propiedades del componente.
+ * @returns {JSX.Element} El componente de gestión de productos.
+ */
 const Productos = (props) => {
   const [show2, setShow2] = useState(false);
   const handleClose2 = () => {

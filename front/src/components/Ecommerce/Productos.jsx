@@ -7,7 +7,18 @@ import { NavLink } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
+/**
+ * Componente para la sección de productos.
+ *
+ * @component
+ * @example
+ * // Uso del componente en otro componente o archivo.
+ * import Productos from './Productos';
+ * // ...
+ * <Productos />
+ */
 const Productos = (props) => {
+  // Estado para controlar la visibilidad del modal de detalles del producto
   const [show, setShow] = useState(false);
   const handleClose = () => {
     setShow(false);
@@ -15,7 +26,7 @@ const Productos = (props) => {
   const handleShow = () => {
     setShow(true);
   };
-
+  // Estado para controlar la visibilidad del modal del carrito de compras
   const [show2, setShow2] = useState(false);
   const handleClose2 = () => {
     setShow2(false);
@@ -25,6 +36,7 @@ const Productos = (props) => {
   };
   return (
     <>
+      {/* Modal de Detalles del Producto */}
       <Modal
         show={show2}
         onHide={handleClose2}
@@ -70,6 +82,8 @@ const Productos = (props) => {
             Save Changes
           </Button>
         </Modal.Footer>
+        {/* Contenido del Modal */}
+        {/* ... (Aquí se mostrarían los detalles del producto) */}
       </Modal>
 
       <Offcanvas show={show} onHide={handleClose} placement="end">

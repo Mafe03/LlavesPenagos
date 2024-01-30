@@ -1,9 +1,21 @@
 import React, { useState } from "react";
 
+/**
+ * Componente para la sección de servicios.
+ *
+ * @component
+ * @example
+ * // Uso del componente en otro componente o archivo.
+ * import Servicio from './Servicio';
+ * // ...
+ * <Servicio />
+ */
 const Servicio = () => {
   return (
     <>
+      {/* Sección Hero */}
       <div className="hero">
+        {/* ... (Contenido de la sección Hero) */}
         <div className="container">
           <div className="row justify-content-between">
             <div className="col-lg-5">
@@ -32,8 +44,9 @@ const Servicio = () => {
           </div>
         </div>
       </div>
-
+      {/* Sección "Why Choose Us" */}
       <div className="why-choose-section">
+        {/* ... (Contenido de la sección "Why Choose Us") */}
         <div className="container-sm">
           <div className="row my-5">
             <div className="col-6 col-md-6 col-lg-3 mb-4">
@@ -166,8 +179,9 @@ const Servicio = () => {
           </div>
         </div>
       </div>
-
+      {/* Sección de Productos */}
       <div className="product-section pt-0">
+        {/* ... (Contenido de la sección de Productos) */}
         <div className="container-sm">
           <div className="row">
             <div className="col-md-12 col-lg-3 mb-5 mb-lg-0">
@@ -232,7 +246,7 @@ const Servicio = () => {
           </div>
         </div>
       </div>
-
+      {/* ... (Contenido del footer) */}
       <footer className="footer-section">
         <div className="container relative">
           <div className="sofa-img">

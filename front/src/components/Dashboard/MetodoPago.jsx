@@ -1,5 +1,16 @@
 import React, { useState } from "react";
 
+/**
+ * Componente que representa la página de Métodos de Pago en el panel de administración.
+ * Muestra información relacionada con los métodos de pago disponibles.
+ *
+ * @component
+ * @example
+ * // Uso del componente en una ruta específica
+ * <Route path="/metodo-pago" element={<MetodoPago />} />
+ *
+ * @returns {JSX.Element} El componente de la página de Métodos de Pago.
+ */
 const MetodoPago = () => {
   return (
     <>

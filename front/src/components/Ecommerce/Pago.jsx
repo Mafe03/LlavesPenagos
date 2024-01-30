@@ -1,17 +1,26 @@
 import React from "react";
 import HelperForm from "../../helper/HelperForm";
-
+/**
+ * Componente funcional que representa la página de pago.
+ * @function Pago
+ * @returns {JSX.Element} JSX que representa la página de pago.
+ */
 const Pago = () => {
+  // Estado y función para gestionar el formulario
   const { form, cambiar } = HelperForm({});
+
   return (
     <>
+      {/* Contenido de la página */}
       <div className="untree_co-section">
         <div className="container-sm">
           <section className="container py-5">
+            {/* Barra de progreso del proceso de pago */}
             <div
               id="ast-checkout-wrap"
               class="ast-checkout-smaller ast-checkout-uppercase"
             >
+              {/* Paso 1: Carrito de Compras */}
               <a href="">
                 <span class="ast-step-number">1</span>
                 <p>Carrito de Compras</p>
@@ -19,6 +28,7 @@ const Pago = () => {
               <span class="ahfb-svg-iconset ast-inline-flex svg-baseline ms-2 me-2">
                 <i class="fa-solid fa-chevron-right"></i>
               </span>{" "}
+              {/* Paso 2: Verificar detalles (Paso actual) */}
               <a href="" class="ast-current">
                 <span class="ast-step-number">2</span>
                 <p>Verificar detalles</p>
@@ -26,6 +36,7 @@ const Pago = () => {
               <span class="ahfb-svg-iconset ast-inline-flex svg-baseline ms-2 me-2">
                 <i class="fa-solid fa-chevron-right"></i>
               </span>{" "}
+              {/* Paso 3: Orden Completa */}
               <a
                 href="#"
                 class="ast-disable-click
@@ -35,11 +46,14 @@ const Pago = () => {
                 <p>Orden Completa</p>
               </a>
             </div>
+
+            {/* Sección de datos de envío */}
             <div className="row  pt-4 pb-3">
               <div className="col-lg-12">
                 <h1 className="h1 text-start text-center">Datos de envio</h1>
               </div>
             </div>
+            {/* Formulario de datos de envío */}
             <div className="container-fluid">
               <div className="row">
                 <div className="col-7">
@@ -55,7 +69,7 @@ const Pago = () => {
                       />
                       <label for="floatingInput">Cedula</label>
                     </div>
-
+                    {/* Campos de entrada para nombre y apellido */}
                     <div class="row g-2 mb-3">
                       <div class="col-md">
                         <div class="form-floating">
@@ -82,6 +96,7 @@ const Pago = () => {
                         </div>
                       </div>
                     </div>
+                    {/* Campo de entrada para el correo electrónico */}
                     <div className="form-floating mb-3">
                       <input
                         type="email"
@@ -93,6 +108,7 @@ const Pago = () => {
                       />
                       <label for="floatingInput">Correo Electronico</label>
                     </div>
+                    {/* Campos de entrada para el celular y la dirección */}
                     <div class="row g-2 mb-3">
                       <div class="col-md">
                         <div class="form-floating">
@@ -106,6 +122,7 @@ const Pago = () => {
                           <label for="floatingInputGrid">Celular</label>
                         </div>
                       </div>
+
                       <div class="col-md">
                         <div class="form-floating">
                           <input
@@ -138,9 +155,11 @@ const Pago = () => {
                     </button>
                   </form>
                 </div>
+                {/* Línea vertical que separa las secciones del formulario */}
                 <div className="col-1 d-flex">
                   <div class="vertical-line"></div>
                 </div>
+                {/* Sección de resumen de productos y total */}
                 <div className="col-4">
                   <h2 className="h2 mb-4 text-start">Productos</h2>
                   <div className="card">

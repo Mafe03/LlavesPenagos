@@ -3,16 +3,26 @@ import { NavLink } from "react-router-dom";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import extintor from "../../assets/images/extinot.png";
 
+/**
+ * Componente funcional que representa la barra de navegación personalizada para la sección de comercio electrónico.
+ * @function NarvbarE
+ * @returns {JSX.Element} JSX que representa la barra de navegación.
+ */
 const NarvbarE = () => {
+  // Estado para controlar la visibilidad del Offcanvas
   const [show, setShow] = useState(false);
+  // Función para cerrar el Offcanvas
+
   const handleClose = () => {
     setShow(false);
   };
+  // Función para mostrar el Offcanvas
   const handleShow = () => {
     setShow(true);
   };
   return (
     <>
+      {/* Offcanvas para el carrito */}
       <Offcanvas show={show} onHide={handleClose} placement="end">
         <Offcanvas.Header closeButton id="gradient">
           <Offcanvas.Title>Tu carrito</Offcanvas.Title>
@@ -63,13 +73,13 @@ const NarvbarE = () => {
                 </div>
               </div>
             </div>
-
+            {/* Icono para eliminar del carrito */}
             <div class="align-self-center">
               {" "}
               <i class="fa-solid fa-delete-left"></i>
             </div>
           </div>
-
+          {/* Espacio para ajustar la posición del contenido */}
           <div style={{ marginBottom: "265px" }}></div>
 
           <div className="d-grid gap-2 ">
@@ -89,6 +99,7 @@ const NarvbarE = () => {
           </div>
         </Offcanvas.Body>
       </Offcanvas>
+      {/* Barra de navegación principal */}
       <nav
         className="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark"
         arial-label="Furni navigation bar"
@@ -99,6 +110,7 @@ const NarvbarE = () => {
             <a className="navbar-brand"></a>
           </NavLink>
 
+          {/* Botón para alternar la visibilidad del menú en dispositivos móviles */}
           <button
             className="navbar-toggler"
             type="button"
@@ -110,8 +122,9 @@ const NarvbarE = () => {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-
+          {/* Contenido del menú */}
           <div className="collapse navbar-collapse" id="navbarsFurni">
+            {/* Enlaces de navegación */}
             <ul className="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
               <li className="nav-item">
                 <NavLink to="/Ecommerce">
@@ -134,7 +147,7 @@ const NarvbarE = () => {
                 </a>
               </li>
             </ul>
-
+            {/* Íconos de usuario y carrito */}
             <ul className="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
               <li>
                 <a className="nav-link" href="#">

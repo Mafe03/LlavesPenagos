@@ -1,5 +1,11 @@
 import React, { useState } from "react";
 
+/**
+ * Componente de barra de navegación principal.
+ *
+ * @component
+ * @returns {JSX.Element} El componente de la barra de navegación.
+ */
 const Navbar = () => {
   return (
     <>
