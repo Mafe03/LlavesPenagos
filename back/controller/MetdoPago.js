@@ -1,5 +1,12 @@
 const { MetodoP } = require("../models/Conexion");
 
+/**
+ * Agrega un nuevo método de pago.
+ *
+ * @param {Object} req - Objeto de solicitud de Express.
+ * @param {Object} res - Objeto de respuesta de Express.
+ * @returns {void}
+ */
 const AgregarMetodPago = async (req, res) => {
   try {
     const Metodos = await MetodoP.create(req.body);
@@ -9,6 +16,13 @@ const AgregarMetodPago = async (req, res) => {
   }
 };
 
+/**
+ * Edita la información de un método de pago por su identificador.
+ *
+ * @param {Object} req - Objeto de solicitud de Express.
+ * @param {Object} res - Objeto de respuesta de Express.
+ * @returns {void}
+ */
 const EditarMetodoPago = async (req, res) => {
   try {
     const Metodos = await MetodoP.update(req.body, {
@@ -20,6 +34,13 @@ const EditarMetodoPago = async (req, res) => {
   }
 };
 
+/**
+ * Elimina un método de pago por su identificador.
+ *
+ * @param {Object} req - Objeto de solicitud de Express.
+ * @param {Object} res - Objeto de respuesta de Express.
+ * @returns {void}
+ */
 const EliminarMetodoPago = async (req, res) => {
   try {
     const Metodos = await MetodoP.destroy({
@@ -31,8 +52,16 @@ const EliminarMetodoPago = async (req, res) => {
   }
 };
 
+/**
+ * Lista todos los métodos de pago.
+ *
+ * @param {Object} req - Objeto de solicitud de Express.
+ * @param {Object} res - Objeto de respuesta de Express.
+ * @returns {void}
+ */
 const ListarTOdosMetodos = async (req, res) => {
   try {
+    // Obtiene todos los métodos de pago
     const Metodos = await MetodoP.findAll();
     res.send({ id: 200, mensaje: Metodos });
   } catch (error) {
@@ -40,8 +69,16 @@ const ListarTOdosMetodos = async (req, res) => {
   }
 };
 
+/**
+ * Obtiene información detallada de un método de pago por su identificador.
+ *
+ * @param {Object} req - Objeto de solicitud de Express.
+ * @param {Object} res - Objeto de respuesta de Express.
+ * @returns {void}
+ */
 const ListarUnMetodoP = async (req, res) => {
   try {
+    // Obtiene información detallada de un método de pago por su identificador
     const Metodos = await MetodoP.findOne({
       where: { idMetodo: req.params.id },
     });

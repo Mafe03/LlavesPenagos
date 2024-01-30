@@ -1,5 +1,11 @@
 const jwt = require("jsonwebtoken");
-
+/**
+ * Middleware de autenticación con JSON Web Tokens (JWT).
+ * @param {Object} req - Objeto de solicitud de Express
+ * @param {Object} res - Objeto de respuesta de Express.
+ * @param {function} next - Función para pasar al siguiente middleware.
+ * @returns {void}
+ */
 const auth = (req, res, next) => {
   const jwtToken = req.header("Authorization");
   if (!jwtToken) {

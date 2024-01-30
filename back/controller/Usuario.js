@@ -3,6 +3,14 @@ const { QueryTypes } = require("sequelize");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+/**
+ * Agrega un nuevo usuario.
+ *
+ * @param {Object} req - Objeto de solicitud de Express.
+ * @param {Object} res - Objeto de respuesta de Express.
+ * @returns {void}
+ */
+
 const AgregarUsuario = async (req, res) => {
   try {
     let datos = req.body;
@@ -27,10 +35,19 @@ const AgregarUsuario = async (req, res) => {
   }
 };
 
+/**
+ * Edita la información de un usuario por su identificador.
+ *
+ * @param {Object} req - Objeto de solicitud de Express.
+ * @param {Object} res - Objeto de respuesta de Express.
+ * @returns {void}
+ */
 const EditarUsuario = async (req, res) => {
   try {
     let datos = req.body;
+    // Cifra la nueva contraseña
     let password = await bcrypt.hash(datos.pass, 10);
+    // Actualiza la información del usuario por su identificador
     const Users = await Usuario.update(
       { ...req.body, pass: password },
       {
@@ -43,8 +60,17 @@ const EditarUsuario = async (req, res) => {
   }
 };
 
+/**
+ * Elimina un usuario por su identificador.
+ *
+ * @param {Object} req - Objeto de solicitud de Express.
+ * @param {Object} res - Objeto de respuesta de Express.
+ * @returns {void}
+ */
+
 const EliminarUsuario = async (req, res) => {
   try {
+    // Elimina un usuario por su identificador
     const Users = await Usuario.destroy({
       where: { idUsuario: req.params.id },
     });
@@ -54,8 +80,16 @@ const EliminarUsuario = async (req, res) => {
   }
 };
 
+/**
+ * Lista todos los usuarios.
+ *
+ * @param {Object} req - Objeto de solicitud de Express.
+ * @param {Object} res - Objeto de respuesta de Express.
+ * @returns {void}
+ */
 const ListarTodosUsuarios = async (req, res) => {
   try {
+    // Obtiene todos los usuarios
     const Users = await sequelize.query(
       "SELECT usuarios.idUsuario, usuarios.nombre, usuarios.apellido, usuarios.telefono, usuarios.direccion, usuarios.email FROM usuarios",
       { type: QueryTypes.SELECT }
@@ -65,7 +99,13 @@ const ListarTodosUsuarios = async (req, res) => {
     res.send({ id: 400, mensaje: error.messages });
   }
 };
-
+/**
+ * Obtiene información detallada de un usuario por su identificador.
+ *
+ * @param {Object} req - Objeto de solicitud de Express.
+ * @param {Object} res - Objeto de respuesta de Express.
+ * @returns {void}
+ */
 const ListarUnUsuario = async (req, res) => {
   try {
     const Users = await sequelize.query(
@@ -77,6 +117,14 @@ const ListarUnUsuario = async (req, res) => {
     res.send({ id: 400, mensaje: error.messages });
   }
 };
+
+/**
+ * Inicia sesión y devuelve un token para validar el ingreso del usuario.
+ *@author Maria Fernanda, Angie Carolina
+ * @param {Object} req - Objeto de solicitud de Express.
+ * @param {Object} res - Objeto de respuesta de Express.
+ * @returns {void}
+ */
 
 const Login = async (req, res) => {
   try {

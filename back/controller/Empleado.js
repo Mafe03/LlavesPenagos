@@ -2,6 +2,13 @@ const { Empleado, sequelize } = require("../models/Conexion");
 const { QueryTypes } = require("sequelize");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+/**
+ * Agrega un nuevo empleado.
+ *
+ * @param {Object} req - Objeto de solicitud de Express.
+ * @param {Object} res - Objeto de respuesta de Express.
+ * @returns {void}
+ */
 
 const AgregarEmpleado = async (req, res) => {
   try {
@@ -26,10 +33,17 @@ const AgregarEmpleado = async (req, res) => {
     res.send({ id: 400, mensaje: error.message });
   }
 };
-
+/**
+ * Edita la información de un empleado existente.
+ *
+ * @param {Object} req - Objeto de solicitud de Express.
+ * @param {Object} res - Objeto de respuesta de Express.
+ * @returns {void}
+ */
 const EditarEmpleado = async (req, res) => {
   try {
     let datos = req.body;
+    // Hash de la nueva contraseña antes de actualizar
     let password = await bcrypt.hash(datos.pass, 10);
     const Empleados = await Empleado.update(
       { ...req.body, pass: password },
@@ -42,7 +56,13 @@ const EditarEmpleado = async (req, res) => {
     res.send({ id: 400, mensaje: error.messages });
   }
 };
-
+/**
+ * Elimina un empleado por su identificador.
+ *
+ * @param {Object} req - Objeto de solicitud de Express.
+ * @param {Object} res - Objeto de respuesta de Express.
+ * @returns {void}
+ */
 const EliminarEmpleado = async (req, res) => {
   try {
     const Empleados = await Empleado.destroy({
@@ -53,7 +73,13 @@ const EliminarEmpleado = async (req, res) => {
     res.send({ id: 400, mensaje: error.messages });
   }
 };
-
+/**
+ * Lista todos los empleados.
+ *
+ * @param {Object} req - Objeto de solicitud de Express.
+ * @param {Object} res - Objeto de respuesta de Express.
+ * @returns {void}
+ */
 const ListarTodosEmpleados = async (req, res) => {
   try {
     const Emple = await sequelize.query(
@@ -66,6 +92,13 @@ const ListarTodosEmpleados = async (req, res) => {
   }
 };
 
+/**
+ * Obtiene información detallada de un empleado por su identificador.
+ *
+ * @param {Object} req - Objeto de solicitud de Express.
+ * @param {Object} res - Objeto de respuesta de Express.
+ * @returns {void}
+ */
 const ListarUnEmpleado = async (req, res) => {
   try {
     const Emple = await sequelize.query(
@@ -77,7 +110,13 @@ const ListarUnEmpleado = async (req, res) => {
     res.send({ id: 400, mensaje: error.messages });
   }
 };
-
+/**
+ * Maneja la autenticación de un empleado y devuelve un token JWT.
+ *
+ * @param {Object} req - Objeto de solicitud de Express.
+ * @param {Object} res - Objeto de respuesta de Express.
+ * @returns {void}
+ */
 const Login = async (req, res) => {
   try {
     let data = req.body;
