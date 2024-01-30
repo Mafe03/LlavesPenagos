@@ -1,13 +1,80 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
+<<<<<<< HEAD
 /**
  * Componente funcional que representa la página de carrito de compras.
  * @function Carrito
  * @returns {JSX.Element} JSX que representa la interfaz de usuario del carrito.
  */
 
+=======
+>>>>>>> c952e302e1aad699223802829b6f2720e06407ff
 const Carrito = () => {
+  const [productosCarrito, setProductosCarrito] = useState([]);
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    verCarrito();
+  }, []);
+  const verCarrito = () => {
+    const productosGuardados =
+      JSON.parse(localStorage.getItem("productos")) || [];
+    setProductosCarrito(productosGuardados);
+    let total2 = productosGuardados.reduce(
+      (total, producto) => total + producto.precio * producto.cantidad,
+      0
+    );
+    setTotal(total2);
+    //console.log(total2);
+  };
+
+  const formatearPrecio = (precio) => {
+    return precio.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  };
+
+  const Eliminar = (productoId) => {
+    const productosGuardados =
+      JSON.parse(localStorage.getItem("productos")) || [];
+
+    const nuevaLista = productosGuardados.filter(
+      (producto) => producto.id !== productoId
+    );
+    //console.log(nuevaLista);
+
+    localStorage.setItem("productos", JSON.stringify(nuevaLista));
+
+    setProductosCarrito([]);
+    setProductosCarrito(nuevaLista);
+    verCarrito();
+  };
+
+  const Cantidad = (id, nuevaCantidad) => {
+    verCarrito();
+    const nuevoCarrito = productosCarrito
+      .map((producto) => {
+        if (producto.id === id) {
+          const cantidadMaxima = producto.cantidadMaxima;
+
+          const cantidadActualizada = Math.min(nuevaCantidad, cantidadMaxima);
+          if (cantidadActualizada > 0 && producto.precio > 0) {
+            return {
+              ...producto,
+              cantidad: cantidadActualizada,
+              total: cantidadActualizada * producto.precio,
+            };
+          } else {
+            return null;
+          }
+        }
+        return producto;
+      })
+      .filter(Boolean);
+
+    localStorage.setItem("productos", JSON.stringify(nuevoCarrito));
+    setProductosCarrito(nuevoCarrito);
+    verCarrito();
+  };
   return (
     <>
       <div className="untree_co-section before-footer-section">
@@ -15,28 +82,30 @@ const Carrito = () => {
           <section className="container py-5">
             <div
               id="ast-checkout-wrap"
-              class="ast-checkout-smaller ast-checkout-uppercase"
+              className="ast-checkout-smaller ast-checkout-uppercase"
             >
-              <a href="" class="ast-current">
-                <span class="ast-step-number">1</span>
-                <p>Carrito de Compras</p>
-              </a>
-              <span class="ahfb-svg-iconset ast-inline-flex svg-baseline ms-2 me-2">
-                <i class="fa-solid fa-chevron-right"></i>
+              <NavLink to={"/Ecommerce/Carrito"}>
+                <a className="ast-current">
+                  <span className="ast-step-number">1</span>
+                  <p>Carrito de Compras</p>
+                </a>
+              </NavLink>
+              <span className="ahfb-svg-iconset ast-inline-flex svg-baseline ms-2 me-2">
+                <i className="fa-solid fa-chevron-right"></i>
               </span>{" "}
               <a href="">
-                <span class="ast-step-number">2</span>
+                <span className="ast-step-number">2</span>
                 <p>Verificar detalles</p>
               </a>
-              <span class="ahfb-svg-iconset ast-inline-flex svg-baseline ms-2 me-2">
-                <i class="fa-solid fa-chevron-right"></i>
+              <span className="ahfb-svg-iconset ast-inline-flex svg-baseline ms-2 me-2">
+                <i className="fa-solid fa-chevron-right"></i>
               </span>{" "}
               <a
                 href="#"
-                class="ast-disable-click
+                className="ast-disable-click
 								"
               >
-                <span class="ast-step-number">3</span>
+                <span className="ast-step-number">3</span>
                 <p>Orden Completa</p>
               </a>
             </div>
@@ -48,7 +117,7 @@ const Carrito = () => {
             <div className="row">
               <div className="col-8">
                 <div className="site-blocks-table">
-                  <table class="table border border-black  ">
+                  <table className="table border border-black  ">
                     <thead>
                       <tr id="tr2">
                         <th id="img"></th>
@@ -59,79 +128,84 @@ const Carrito = () => {
                         <th></th>
                       </tr>
                     </thead>
+
                     <tbody>
-                      <tr>
-                        <td className="align-middle" id="img">
-                          <div className="d-flex align-items-center">
-                            <img
-                              width="100px"
-                              className="mb-0"
-                              src="https://websitedemos.net/egrow-plants-04/wp-content/uploads/sites/1114/2022/07/flower-008-a-400x550.jpg"
-                              alt=""
-                            />
-                          </div>
-                        </td>
-                        <td className="align-middle" id="camisa">
-                          <div className="d-flex align-items-center">
-                            <p className="mb-0">Camiseta</p>
-                          </div>
-                        </td>
-                        <td className="align-middle">
-                          <div className="d-flex align-items-center">
-                            <p className="mb-0">$90.000</p>
-                          </div>
-                        </td>
-                        <td className="align-middle">
-                          <div className="d-flex align-items-center">
-                            <div
-                              className="input-group mb-3 d-flex align-items-center quantity-container"
-                              style={{ maxWidth: "120px" }}
-                            >
-                              <div className="input-group-prepend">
-                                <button
-                                  className="btn btn-outline-black decrease"
-                                  type="button"
-                                >
-                                  -
-                                </button>
-                              </div>
-                              <input
-                                type="text"
-                                className="form-control text-center quantity-amount"
-                                value="1"
-                                placeholder=""
-                                aria-label="Example text with button addon"
-                                aria-describedby="button-addon1"
-                              />
-                              <div className="input-group-append">
-                                <button
-                                  className="btn btn-outline-black increase"
-                                  type="button"
-                                >
-                                  +
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="align-middle">
-                          <div className="d-flex align-items-center">
-                            <p className="mb-0">$90.000</p>
-                          </div>
-                        </td>
-                        <td className="align-middle">
-                          <i class="fa-solid fa-delete-left"></i>
-                        </td>
-                      </tr>
+                      {productosCarrito.length > 0 ? (
+                        productosCarrito.map((producto) => {
+                          return (
+                            <tr>
+                              <td className="align-middle" id="img">
+                                <div className="d-flex align-items-center">
+                                  <img
+                                    width="100px"
+                                    height="100px"
+                                    className="mb-0"
+                                    src={producto.imagen}
+                                    alt=""
+                                  />
+                                </div>
+                              </td>
+                              <td className="align-middle" id="camisa">
+                                <div className="d-flex align-items-center">
+                                  <p className="mb-0">{producto.nombre}</p>
+                                </div>
+                              </td>
+                              <td className="align-middle">
+                                <div className="d-flex align-items-center">
+                                  <p className="mb-0">
+                                    ${formatearPrecio(producto.precio)}
+                                  </p>
+                                </div>
+                              </td>
+                              <td className="align-middle">
+                                <div className="d-flex align-items-center">
+                                  <div
+                                    className="input-group mb-3 d-flex align-items-center quantity-container"
+                                    style={{ maxWidth: "120px" }}
+                                  >
+                                    <input
+                                      type="number"
+                                      value={producto.cantidad}
+                                      onChange={(e) =>
+                                        Cantidad(producto.id, e.target.value)
+                                      }
+                                      max={producto.cantidadMaxima}
+                                      min={0}
+                                      className="form-control text-center quantity-amount"
+                                    />
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="align-middle">
+                                <div className="d-flex align-items-center">
+                                  <p className="mb-0">
+                                    ${formatearPrecio(producto.total)}
+                                  </p>
+                                </div>
+                              </td>
+                              <td className="align-middle">
+                                <i
+                                  className="fa-solid fa-delete-left"
+                                  onClick={() => {
+                                    Eliminar(producto.id);
+                                  }}
+                                ></i>
+                              </td>
+                            </tr>
+                          );
+                        })
+                      ) : (
+                        <td>No hay productos</td>
+                      )}
                     </tbody>
                   </table>
                 </div>
               </div>
 
               <div className="col-4">
-                <div class="card">
+                <div className="card">
                   <div
-                    class="card-header "
+                    className="card-header "
                     style={{
                       color: "white",
                       padding: "10px",
@@ -142,25 +216,44 @@ const Carrito = () => {
                   >
                     Total Carrito
                   </div>
-                  <div class="card-body">
+                  <div className="card-body">
                     <div className="d-flex">
-                      <p class="card-text mt-3">Subtotal:</p>
-                      <p class="card-text mt-3 ms-5">$90.000</p>
+                      <p className="card-text mt-3">Subtotal:</p>
+                      <p className="card-text mt-3 ms-5">
+                        ${formatearPrecio(total)}
+                      </p>
                     </div>
                     <hr />
                     <div className="d-flex">
-                      <p class="card-text mt-3">Total:</p>{" "}
-                      <p class="card-text mt-3 ms-5">$90.000</p>
+                      <p className="card-text mt-3">Total:</p>{" "}
+                      <p className="card-text mt-3 ms-5">
+                        ${formatearPrecio(total)}
+                      </p>
                     </div>
                     <hr />
-                    <NavLink to="/Ecommerce/PasarelaPago">
-                      <button
-                        href="#"
-                        class="btn btn-success w-100 mt-5 btn-gradient"
-                      >
-                        Pagar
-                      </button>
-                    </NavLink>
+                    {productosCarrito.length > 0 ? (
+                      <>
+                        <NavLink to="/Ecommerce/PasarelaPago">
+                          <button
+                            href="#"
+                            className="btn btn-dark w-100 mt-5 btn-gradient"
+                          >
+                            Pagar
+                          </button>
+                        </NavLink>
+                      </>
+                    ) : (
+                      <>
+                        <NavLink to="/Ecommerce" className="">
+                          <button
+                            href="#"
+                            className="btn btn-gradient2 w-100 mt-3 btn-dark"
+                          >
+                            Seguir comprando
+                          </button>
+                        </NavLink>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
@@ -171,21 +264,10 @@ const Carrito = () => {
 
       <footer className="footer-section">
         <div className="container relative">
-          <div className="sofa-img">
-            <img src="images/sofa.png" alt="Image" className="img-fluid" />
-          </div>
-
           <div className="row">
             <div className="col-lg-8">
               <div className="subscription-form">
                 <h3 className="d-flex align-items-center">
-                  <span className="me-1">
-                    <img
-                      src="images/envelope-outline.svg"
-                      alt="Image"
-                      className="img-fluid"
-                    />
-                  </span>
                   <span>Subscribe to Newsletter</span>
                 </h3>
 

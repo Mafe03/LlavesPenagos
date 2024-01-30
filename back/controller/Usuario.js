@@ -69,7 +69,7 @@ const ListarTodosUsuarios = async (req, res) => {
 const ListarUnUsuario = async (req, res) => {
   try {
     const Users = await sequelize.query(
-      `SELECT usuarios.idUsuario, usuarios.nombre, usuarios.apellido, usuarios.telefono, usuarios.direccion, usuarios.email FROM usuarios WHERE idUsuario=${req.params.id}`,
+      `SELECT usuarios.idUsuario, usuarios.nombre, usuarios.apellido, usuarios.telefono, usuarios.direccion, usuarios.email, usuarios.pass FROM usuarios WHERE idUsuario=${req.params.id}`,
       { type: QueryTypes.SELECT }
     );
     res.send({ id: 200, mensaje: Users });
@@ -101,6 +101,7 @@ const Login = async (req, res) => {
           {
             idUsuario: dataUsers[0].idUsuario,
             nombre: dataUsers[0].nombre,
+            apellido: dataUsers[0].apellido,
             email: dataUsers[0].email,
           },
           "Mafe&Angie",
@@ -114,6 +115,7 @@ const Login = async (req, res) => {
           usuario: {
             idUsuario: dataUsers[0].idUsuario,
             nombre: dataUsers[0].nombre,
+            apellido: dataUsers[0].apellido,
             email: dataUsers[0].email,
           },
           token: token,

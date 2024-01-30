@@ -1,11 +1,14 @@
-import React, { useState } from "react";
-import cross from "../../assets/images/bag.svg";
+import React, { useState, useEffect } from "react";
 import envelope from "../../assets/images/envelope-outline.svg";
 import extintor from "../../assets/images/extinot.png";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { NavLink } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
+import ImgEyes from "../../assets/images/eyes.png";
+import ImgCart from "../../assets/images/cart.png";
+import Swal2 from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+const MySwal = withReactContent(Swal2);
 
 /**
  * Componente para la sección de productos.
@@ -18,15 +21,109 @@ import Button from "react-bootstrap/Button";
  * <Productos />
  */
 const Productos = (props) => {
+<<<<<<< HEAD
   // Estado para controlar la visibilidad del modal de detalles del producto
   const [show, setShow] = useState(false);
   const handleClose = () => {
     setShow(false);
+=======
+  const [categorias, setCategorias] = useState([]);
+  const [productos, setProductos] = useState([]);
+  const [modal, setModal] = useState([]);
+
+  const token = localStorage.getItem("token");
+
+  const ListarUnProducto = async (id) => {
+    const request = await fetch(
+      `http://localhost:3600/productos/listarUno/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `${token}`,
+        },
+      }
+    );
+    const data = await request.json();
+    setModal([]);
+    setModal(data.mensaje);
+>>>>>>> c952e302e1aad699223802829b6f2720e06407ff
   };
-  const handleShow = () => {
-    setShow(true);
+  const listarProductosCategoria = async (idCategoria) => {
+    const request = await fetch(
+      `http://localhost:3600/productos/listarCategoria/${idCategoria}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `${token}`,
+        },
+      }
+    );
+    const data = await request.json();
+    //console.log(data);
+    //console.table(data);
+    setProductos([]);
+    setProductos(data.mensaje);
   };
+<<<<<<< HEAD
   // Estado para controlar la visibilidad del modal del carrito de compras
+=======
+
+  const buscarProducto = async (e) => {
+    const request = await fetch(
+      `http://localhost:3600/productos/buscarProducto/${e.target.value}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `${token}`,
+        },
+      }
+    );
+    const data = await request.json();
+    //console.log(data);
+    //console.table(data);
+    setProductos([]);
+    setProductos(data.mensaje);
+  };
+
+  const listarProductos = async () => {
+    const request = await fetch("http://localhost:3600/productos/listarI", {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `${token}`,
+      },
+    });
+    const data = await request.json();
+    //console.log(data);
+    setProductos([]);
+    setProductos(data.mensaje);
+  };
+
+  const listarCategorias = async () => {
+    const request = await fetch("http://localhost:3600/categorias/listar", {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `${token}`,
+      },
+    });
+    const data = await request.json();
+    //console.log(data);
+    setCategorias(data.mensaje);
+  };
+
+  useEffect(() => {
+    listarCategorias();
+  }, []);
+
+  useEffect(() => {
+    listarProductos();
+  }, []);
+
+>>>>>>> c952e302e1aad699223802829b6f2720e06407ff
   const [show2, setShow2] = useState(false);
   const handleClose2 = () => {
     setShow2(false);
@@ -34,44 +131,81 @@ const Productos = (props) => {
   const handleShow2 = () => {
     setShow2(true);
   };
+
+  const [prodLocalStorage, setProdLocalStorage] = useState(
+    JSON.parse(localStorage.getItem("productos")) || []
+  );
+
+  //FUNCION PARA VERIFICAR SI EL PRODUCTO YA ESTA
+  const VerificarLocalStorage = (producto) => {
+    const productosGuardados =
+      JSON.parse(localStorage.getItem("productos")) || [];
+    return productosGuardados.some((p) => p.id === producto.idProducto);
+  };
+
+  const handleClick = (product) => {
+    if (VerificarLocalStorage(product)) {
+      MySwal.fire({
+        title: <strong> {"Error"}</strong>,
+        html: <i>{"El producto ya existe en el carrito"}</i>,
+        icon: "error",
+      });
+    } else {
+      let nuevosProductos = JSON.parse(localStorage.getItem("productos")) || [];
+      let nuevoTotal = product.precio * 1;
+
+      const nuevaLista = [
+        ...nuevosProductos,
+        {
+          imagen: product.imagen,
+          nombre: product.nombre,
+          id: product.idProducto,
+          precio: product.precio,
+          cantidad: 1,
+          cantidadMaxima: product.cantidad,
+          total: nuevoTotal,
+        },
+      ];
+      setProdLocalStorage([]);
+      localStorage.setItem("productos", JSON.stringify(nuevaLista));
+      setProdLocalStorage(nuevaLista);
+
+      localStorage.setItem("productos", JSON.stringify(nuevaLista));
+      MySwal.fire({
+        title: <strong> {"Agregado"}</strong>,
+        html: <i>{"Producto agregado al carrito"}</i>,
+        icon: "success",
+      });
+    }
+  };
+
+  const formatearPrecio = (precio) => {
+    return precio.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  };
+
   return (
     <>
       {/* Modal de Detalles del Producto */}
       <Modal
         show={show2}
         onHide={handleClose2}
-        {...props}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">Producto</Modal.Title>
-        </Modal.Header>
+        <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
-          <div className="card mb-4" style={{ maxWidth: "820%" }}>
-            <div className="row g-0">
-              <div className="col-md-4">
-                <img
-                  src={extintor}
-                  className="img-fluid rounded-start"
-                  alt="..."
-                />
-              </div>
-              <div className="col-md-8">
-                <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                  </p>
-                  <p className="card-text">
-                    <small className="text-body-secondary">
-                      Last updated 3 mins ago
-                    </small>
-                  </p>
+          {modal.map((producto) => {
+            return (
+              <div className="d-flex" key={producto.idProducto}>
+                <div className="flex-shrink-0">
+                  <img
+                    src={producto.imagen}
+                    alt="..."
+                    style={{ width: "350px", height: "350px" }}
+                  />
                 </div>
+<<<<<<< HEAD
               </div>
             </div>
           </div>
@@ -85,138 +219,140 @@ const Productos = (props) => {
         {/* Contenido del Modal */}
         {/* ... (Aquí se mostrarían los detalles del producto) */}
       </Modal>
+=======
+                <div className="flex-grow-1 ms-3 d-flex flex-column justify-content-between">
+                  <div>
+                    <h3>{producto.nombre}</h3>
+>>>>>>> c952e302e1aad699223802829b6f2720e06407ff
 
-      <Offcanvas show={show} onHide={handleClose} placement="end">
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Tú Carrito de Compras</Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body className="fixed-body">
-          <div className="card mb-3" style={{ maxWidth: "500%" }}>
-            <div className="row g-0">
-              <div className="col-md-4">
-                <img src="..." className="img-fluid rounded-start" alt="..." />
-              </div>
-              <div className="col-md-8">
-                <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                  </p>
-                  <p className="card-text">
-                    <small className="text-body-secondary">
-                      Last updated 3 mins ago
-                    </small>
-                  </p>
+                    <p className="mt-3">{producto.descripcion}</p>
+                    <p className="mt-2">$ {formatearPrecio(producto.precio)}</p>
+                    <p className="mt-2">Stock: {producto.cantidad}</p>
+                  </div>
+                  {producto.cantidad === 0 ? (
+                    <button
+                      href="#"
+                      className="btn btn-dark w-100 mt-auto btn-gradient"
+                      disabled
+                    >
+                      <i className="bi bi-cart4"></i> No hay producto
+                    </button>
+                  ) : (
+                    <button
+                      href="#"
+                      className="btn btn-dark w-100 mt-auto btn-gradient"
+                      onClick={() => {
+                        handleClick(producto);
+                        handleClose2();
+                      }}
+                    >
+                      <i className="bi bi-cart4"></i> Agregar al carrito
+                    </button>
+                  )}
                 </div>
               </div>
-            </div>
-          </div>
-          <NavLink to="/Ecommerce/Carrito">
-            <button className="button">Ver carrito</button>
-          </NavLink>
-        </Offcanvas.Body>
-      </Offcanvas>
+            );
+          })}
+        </Modal.Body>
+      </Modal>
 
       <div className="untree_co-section product-section before-footer-section">
         <div className="container">
           <div className="row">
-            <div className="col-12">dasd</div>
-          </div>
-          <div className="row mt-5">
-            <div className="col-3">
-              <div class="accordion" id="accordionExample">
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button
-                      class="accordion-button"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#collapseOne"
-                      aria-expanded="true"
-                      aria-controls="collapseOne"
-                    >
-                      Accordion Item #1
-                    </button>
-                  </h2>
-                  <div
-                    id="collapseOne"
-                    class="accordion-collapse collapse show"
-                    data-bs-parent="#accordionExample"
-                  >
-                    <div class="accordion-body">
-                      <strong>This is the first item's accordion body.</strong>{" "}
-                      It is shown by default, until the collapse plugin adds the
-                      appropriate classes that we use to style each element.
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button
-                      class="accordion-button collapsed"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#collapseTwo"
-                      aria-expanded="false"
-                      aria-controls="collapseTwo"
-                    >
-                      Accordion Item #2
-                    </button>
-                  </h2>
-                  <div
-                    id="collapseTwo"
-                    class="accordion-collapse collapse"
-                    data-bs-parent="#accordionExample"
-                  >
-                    <div class="accordion-body">
-                      <strong>This is the second item's accordion body.</strong>{" "}
-                      It is hidden by default, until the collapse plugin adds
-                      the appropriate classes that we use to style each element.
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button
-                      class="accordion-button collapsed"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#collapseThree"
-                      aria-expanded="false"
-                      aria-controls="collapseThree"
-                    >
-                      Accordion Item #3
-                    </button>
-                  </h2>
-                  <div
-                    id="collapseThree"
-                    class="accordion-collapse collapse"
-                    data-bs-parent="#accordionExample"
-                  >
-                    <div class="accordion-body">
-                      <strong>This is the third item's accordion body.</strong>{" "}
-                      It is hidden by default, until the collapse plugin adds
-                      the appropriate classes that we use to style each element.
-                    </div>
-                  </div>
-                </div>
+            <div className="main-nav-start text-end">
+              <div className="search-wrapper">
+                <input
+                  type="text"
+                  placeholder="Buscar"
+                  onChange={buscarProducto}
+                  required
+                />
               </div>
             </div>
-            <div className="col-9 col-md-4 col-lg-3 mb-5 border border-secondary-subtle">
-              <a className="product-item ">
-                <img src={extintor} className="img-fluid product-thumbnail" />
-                <h3 className="product-title">Nordic Chair</h3>
-                <strong className="product-price">$50.00</strong>
+          </div>
+          <h3>Categorias</h3>
+          <div className="row mt-5">
+            <div className="col-3">
+              <div className="list-group" id="list-tab" role="tablist">
+                <a
+                  className="list-group-item list-group-item-action "
+                  id="list-home-list"
+                  data-bs-toggle="list"
+                  href="#list-home"
+                  role="tab"
+                  aria-controls="list-home"
+                  onClick={() => {
+                    listarProductos();
+                  }}
+                >
+                  Todos
+                </a>
+                {categorias.map((categoria) => {
+                  return (
+                    <a
+                      className="list-group-item list-group-item-action "
+                      id="list-home-list"
+                      data-bs-toggle="list"
+                      href="#list-home"
+                      role="tab"
+                      aria-controls="list-home"
+                      onClick={() => {
+                        listarProductosCategoria(categoria.idCategoria);
+                      }}
+                    >
+                      {categoria.descripCategoria}
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
+            <div className="col-1 d-flex">
+              <div className="vertical-line"></div>
+            </div>
+            <div className="col-8">
+              <div className="row">
+                {productos.map((producto) => {
+                  return (
+                    <div className="col-4 col-md-4 col-lg-4 mb-5 border border-secondary-subtle ">
+                      {" "}
+                      <a className="product-item ">
+                        <img
+                          src={producto.imagen}
+                          className="img-fluid product-thumbnail"
+                          style={{ width: "320px", height: "310px" }}
+                        />
+                        <hr />
+                        <h3 className="product-title mb-2">
+                          {producto.nombre}
+                        </h3>
 
-                <span className="icon-cross" onClick={handleShow}>
-                  <i class="bi bi-bag-plus"></i>
-                </span>
-                <span className="icon-cross2  " onClick={handleShow2}>
-                  <img src="a" className="img-fluid" />
-                </span>
-              </a>
+                        <span className="product-price ">
+                          $ {formatearPrecio(producto.precio)}
+                        </span>
+                        <p className="mt-2">Stock: {producto.cantidad}</p>
+
+                        <span
+                          className="icon-cross"
+                          onClick={() => {
+                            handleClick(producto);
+                          }}
+                        >
+                          <img src={ImgCart} className="img-fluid" />
+                        </span>
+                        <span
+                          className="icon-cross2 "
+                          onClick={() => {
+                            ListarUnProducto(producto.idProducto);
+                            handleShow2();
+                          }}
+                        >
+                          <img src={ImgEyes} className="img-fluid" />
+                        </span>
+                      </a>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
