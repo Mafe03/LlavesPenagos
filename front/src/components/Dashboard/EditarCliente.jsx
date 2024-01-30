@@ -5,6 +5,22 @@ import HelperForm from "../../helper/HelperForm";
 import Swal2 from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
+/**
+ * Componente para editar la información de un cliente mediante un modal.
+ *
+ * @component
+ * @param {Object} props - Propiedades del componente.
+ * @param {boolean} props.show - Indica si el modal debe mostrarse.
+ * @param {Function} props.handleClose - Función para cerrar el modal.
+ * @param {number} props.id - Identificador del cliente.
+ * @param {string} props.nombre - Nombre actual del cliente.
+ * @param {string} props.apellido - Apellido actual del cliente.
+ * @param {string} props.telefono - Teléfono actual del cliente.
+ * @param {string} props.direccion - Dirección actual del cliente.
+ * @param {string} props.email - Correo electrónico actual del cliente.
+ * @param {Function} props.setEditar - Función para establecer el estado de edición.
+ * @param {Function} props.listarCliente - Función para listar los clientes.
+ */
 const Swal = withReactContent(Swal2);
 
 const EditarCliente = ({
@@ -150,7 +166,6 @@ const EditarCliente = ({
             </div>
           </Modal.Body>
           <Modal.Footer>
-           
             <button type="submit" className=" btn-gradient">
               <i className="fas fa-edit"></i> Editar
             </button>

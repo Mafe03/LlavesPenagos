@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-
+/**
+ * Functional component representing the final step of the checkout process.
+ * @returns {JSX.Element} React component.
+ */
 const Factura = () => {
+  /**
+   * Render the Factura component.
+   * @returns {JSX.Element} JSX for the component.
+   */
   return (
     <>
       <div className="untree_co-section before-footer-section">
