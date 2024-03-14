@@ -10,7 +10,15 @@ import logo from "../../assets/images/logoLlaves.png";
 
 const MySwal = withReactContent(Swal2);
 
+/**
+ * Componente funcional que representa la barra de navegación personalizada para la sección de comercio electrónico.
+ * @function NarvbarE
+ * @returns {JSX.Element} JSX que representa la barra de navegación.
+ */
 const NarvbarE = () => {
+<<<<<<< HEAD
+  // Estado para controlar la visibilidad del Offcanvas
+=======
   const [productosCarrito, setProductosCarrito] = useState([]);
   const [total, setTotal] = useState(0);
 
@@ -69,15 +77,20 @@ const NarvbarE = () => {
   };
 
   const datos = JSON.parse(localStorage.getItem("user"));
+>>>>>>> c952e302e1aad699223802829b6f2720e06407ff
   const [show, setShow] = useState(false);
+  // Función para cerrar el Offcanvas
+
   const handleClose = () => {
     setShow(false);
   };
+  // Función para mostrar el Offcanvas
   const handleShow = () => {
     setShow(true);
   };
   return (
     <>
+      {/* Offcanvas para el carrito */}
       <Offcanvas show={show} onHide={handleClose} placement="end">
         <Offcanvas.Header closeButton id="gradient">
           <Offcanvas.Title>Tu carrito</Offcanvas.Title>
@@ -117,9 +130,21 @@ const NarvbarE = () => {
             <div>
               <h1>No hay productos</h1>
             </div>
+<<<<<<< HEAD
+            {/* Icono para eliminar del carrito */}
+            <div class="align-self-center">
+              {" "}
+              <i class="fa-solid fa-delete-left"></i>
+            </div>
+          </div>
+          {/* Espacio para ajustar la posición del contenido */}
+          <div style={{ marginBottom: "265px" }}></div>
+
+=======
           )}
           <div className="flex-fill"></div>{" "}
           {/* Espacio flexible para empujar los botones hacia abajo */}
+>>>>>>> c952e302e1aad699223802829b6f2720e06407ff
           <div className="d-grid gap-2 ">
             <hr />
             <div className="d-flex">
@@ -139,7 +164,11 @@ const NarvbarE = () => {
           </div>
         </Offcanvas.Body>
       </Offcanvas>
+<<<<<<< HEAD
+      {/* Barra de navegación principal */}
+=======
 
+>>>>>>> c952e302e1aad699223802829b6f2720e06407ff
       <nav
         className="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark"
         arial-label="Furni navigation bar"
@@ -148,7 +177,25 @@ const NarvbarE = () => {
         <div className="container">
           <img src={logo} alt="" width={"5%"} />
 
+<<<<<<< HEAD
+          {/* Botón para alternar la visibilidad del menú en dispositivos móviles */}
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarsFurni"
+            aria-controls="navbarsFurni"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          {/* Contenido del menú */}
+          <div className="collapse navbar-collapse" id="navbarsFurni">
+            {/* Enlaces de navegación */}
+=======
           <div className="collapse navbar-collapse " id="navbarsFurni">
+>>>>>>> c952e302e1aad699223802829b6f2720e06407ff
             <ul className="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
               <li className="nav-item">
                 <NavLink to="/Ecommerce">
@@ -171,7 +218,7 @@ const NarvbarE = () => {
                 </NavLink>
               </li>
             </ul>
-
+            {/* Íconos de usuario y carrito */}
             <ul className="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
               <li>
                 <NavLink to="Perfil">

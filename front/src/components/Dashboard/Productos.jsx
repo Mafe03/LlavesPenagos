@@ -6,6 +6,13 @@ import Swal2 from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 const MySwal = withReactContent(Swal2);
 
+/**
+ * Componente para la gestión de productos.
+ *
+ * @component
+ * @param {object} props - Las propiedades del componente.
+ * @returns {JSX.Element} El componente de gestión de productos.
+ */
 const Productos = (props) => {
   const [datos, Setdatos] = useState([]);
   const [datos2, SetDatos2] = useState([]);

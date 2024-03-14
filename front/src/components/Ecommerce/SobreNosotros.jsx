@@ -1,5 +1,14 @@
 import React, { useState } from "react";
 
+/**
+ * Componente funcional que representa la sección "Sobre Nosotros" de la página.
+ * @component
+ * @example
+ * // Uso del componente en otro archivo React
+ * import SobreNosotros from "./RutaDondeEstaElComponente";
+ * // ...
+ * <SobreNosotros />
+ */
 const SobreNosotros = () => {
   return (
     <>

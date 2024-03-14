@@ -6,6 +6,18 @@ import Swal2 from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 const Swal = withReactContent(Swal2);
 
+/**
+ * Componente para editar un método de pago mediante un modal.
+ *
+ * @component
+ * @param {Object} props - Propiedades del componente.
+ * @param {boolean} props.show - Indica si el modal debe mostrarse.
+ * @param {Function} props.handleClose - Función para cerrar el modal.
+ * @param {number} props.id - Identificador del método de pago.
+ * @param {string} props.metodo - Descripción actual del método de pago.
+ * @param {Function} props.setEditar - Función para establecer el estado de edición.
+ * @param {Function} props.listarMetodop - Función para listar los métodos de pago.
+ */
 const EditarMetodoPago = ({
   props,
   show,
@@ -79,7 +91,6 @@ const EditarMetodoPago = ({
             </div>
           </Modal.Body>
           <Modal.Footer>
-            
             <button type="submit" className=" btn-gradient">
               <i className="fas fa-edit"></i> Editar
             </button>

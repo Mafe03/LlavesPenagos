@@ -1,14 +1,54 @@
 import React, { useState, useEffect } from "react";
 import Avatar from "../../assets/images/useravatar.png";
 import Modal from "react-bootstrap/Modal";
+/**
+ * Componente funcional que representa la página de perfil del usuario.
+ *
+ * @component
+ * @example
+ * // Uso del componente en otro archivo de React
+ * import Perfil from './Perfil';
+ * const App = () => {
+ *   return <Perfil />;
+ * }
+ */
 const Perfil = (props) => {
+  /**
+   * Estado que almacena los datos del usuario.
+   * @type {Array}
+   */
   const [datos, SetDatos] = useState([]);
+  /**
+   * Token de autorización almacenado en el localStorage.
+   * @type {string|null}
+   */
   const token = localStorage.getItem("token");
+  /**
+   * Datos del usuario almacenados en el localStorage.
+   * @type {Object|null}
+   */
   const datos1 = JSON.parse(localStorage.getItem("user"));
+  /**
+   * Estado que almacena los encabezados de las facturas del usuario.
+   * @type {Array}
+   */
   const [encabezados, setEncabezados] = useState([]);
+  /**
+   * Estado que almacena los detalles de una factura específica.
+   * @type {Array}
+   */
   const [detalle, setDetalle] = useState([]);
+  /**
+   * Estado que almacena la información para mostrar en un modal.
+   * @type {Object}
+   */
   const [modalData, setModalData] = useState({ fecha: "", total: 0, id: 0 });
-
+  /**
+   * Función asíncrona para obtener los encabezados de las facturas del usuario.
+   * @function
+   * @async
+   * @name EncabezadoUser
+   */
   const EncabezadoUser = async () => {
     const request = await fetch(
       `http://localhost:3600/encabezado/listarEncaUser/${datos1.idUsuario}`,
@@ -20,12 +60,19 @@ const Perfil = (props) => {
         },
       }
     );
+
     const data = await request.json();
     //console.log(data);
     setEncabezados([]);
     setEncabezados(data.mensaje);
     //console.log(encabezados);
   };
+  /**
+   * Función asíncrona para obtener los datos del usuario.
+   * @function
+   * @async
+   * @name traer
+   */
 
   const traer = async () => {
     const usuario = await fetch(
@@ -42,11 +89,23 @@ const Perfil = (props) => {
 
     SetDatos(datosuser.mensaje);
   };
+  /**
+   * Efecto que se ejecuta al montar el componente para obtener datos y encabezados.
+   * @effect
+   * @name useEffect
+   */
   useEffect(() => {
     traer();
     //console.log(datos);
   }, []);
 
+  /**
+   * Función para formatear el precio en formato de moneda.
+   * @function
+   * @param {number} precio - Precio a formatear.
+   * @returns {string} Precio formateado en formato de moneda.
+   * @name formatearPrecio
+   */
   const formatearPrecio = (precio) => {
     return precio.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   };

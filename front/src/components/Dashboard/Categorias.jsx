@@ -1,3 +1,21 @@
+<<<<<<< HEAD
+import React, { useState } from "react";
+/**
+ * Componente de la página de Categorías.
+ * @component
+ * @returns {JSX.Element} JSX para renderizar la página de categorías.
+ */
+const Categorias = () => {
+  return (
+    <>
+      {/* Contenido principal de la página */}
+      <main className="main users chart-page" id="skip-target">
+        <div className="container">
+          <h2 className="main-title">Categorias</h2>
+          {/* Sección para las tarjetas de estadísticas (actualmente vacía) */}
+          <div className="row stat-cards">
+            <div className="col-md-6 col-xl-3"></div>
+=======
 import React, { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import EditarCategoria from "./EditarCategoria";
@@ -214,6 +232,7 @@ const Categorias = (props) => {
                 </tbody>
               </table>
             </div>
+>>>>>>> c952e302e1aad699223802829b6f2720e06407ff
           </div>
         </div>
       </main>
@@ -221,7 +240,12 @@ const Categorias = (props) => {
         <div className="container footer--flex">
           <div className="footer-start">
             <p>
+<<<<<<< HEAD
+              {/* Año de copyright y enlace al sitio Elegant Dashboard */}
+              2021 © Elegant Dashboard -{" "}
+=======
               2021 © Llaves y Extintores Penagos-{" "}
+>>>>>>> c952e302e1aad699223802829b6f2720e06407ff
               <a
                 href="elegant-dashboard.com"
                 target="_blank"

@@ -10,7 +10,23 @@ import Swal2 from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 const MySwal = withReactContent(Swal2);
 
+/**
+ * Componente para la sección de productos.
+ *
+ * @component
+ * @example
+ * // Uso del componente en otro componente o archivo.
+ * import Productos from './Productos';
+ * // ...
+ * <Productos />
+ */
 const Productos = (props) => {
+<<<<<<< HEAD
+  // Estado para controlar la visibilidad del modal de detalles del producto
+  const [show, setShow] = useState(false);
+  const handleClose = () => {
+    setShow(false);
+=======
   const [categorias, setCategorias] = useState([]);
   const [productos, setProductos] = useState([]);
   const [modal, setModal] = useState([]);
@@ -31,6 +47,7 @@ const Productos = (props) => {
     const data = await request.json();
     setModal([]);
     setModal(data.mensaje);
+>>>>>>> c952e302e1aad699223802829b6f2720e06407ff
   };
   const listarProductosCategoria = async (idCategoria) => {
     const request = await fetch(
@@ -49,6 +66,9 @@ const Productos = (props) => {
     setProductos([]);
     setProductos(data.mensaje);
   };
+<<<<<<< HEAD
+  // Estado para controlar la visibilidad del modal del carrito de compras
+=======
 
   const buscarProducto = async (e) => {
     const request = await fetch(
@@ -103,6 +123,7 @@ const Productos = (props) => {
     listarProductos();
   }, []);
 
+>>>>>>> c952e302e1aad699223802829b6f2720e06407ff
   const [show2, setShow2] = useState(false);
   const handleClose2 = () => {
     setShow2(false);
@@ -164,6 +185,7 @@ const Productos = (props) => {
 
   return (
     <>
+      {/* Modal de Detalles del Producto */}
       <Modal
         show={show2}
         onHide={handleClose2}
@@ -183,9 +205,25 @@ const Productos = (props) => {
                     style={{ width: "350px", height: "350px" }}
                   />
                 </div>
+<<<<<<< HEAD
+              </div>
+            </div>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary">Close</Button>
+          <Button variant="primary" onClick={handleClose2}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+        {/* Contenido del Modal */}
+        {/* ... (Aquí se mostrarían los detalles del producto) */}
+      </Modal>
+=======
                 <div className="flex-grow-1 ms-3 d-flex flex-column justify-content-between">
                   <div>
                     <h3>{producto.nombre}</h3>
+>>>>>>> c952e302e1aad699223802829b6f2720e06407ff
 
                     <p className="mt-3">{producto.descripcion}</p>
                     <p className="mt-2">$ {formatearPrecio(producto.precio)}</p>

@@ -5,6 +5,17 @@ import HelperForm from "../../helper/HelperForm";
 import Swal2 from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
+<<<<<<< HEAD
+/**
+ * Componente para editar un usuario mediante un modal.
+ * @component
+ * @param {Object} props - Propiedades del componente.
+ * @param {boolean} show - Indica si el modal debe mostrarse o no.
+ * @param {function} handleClose - Función para cerrar el modal.
+ * @returns {JSX.Element} JSX para renderizar el modal de edición de usuarios.
+ */
+const EditarUser = (props, show, handleClose) => {
+=======
 const Swal = withReactContent(Swal2);
 
 const EditarUser = ({
@@ -65,6 +76,7 @@ const EditarUser = ({
       pass.value = "";
     }
   };
+>>>>>>> c952e302e1aad699223802829b6f2720e06407ff
   return (
     <>
       <Modal

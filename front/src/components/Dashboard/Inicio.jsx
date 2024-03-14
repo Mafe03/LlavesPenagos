@@ -10,7 +10,16 @@ import withReactContent from "sweetalert2-react-content";
 
 const Swal = withReactContent(Swal2);
 
+/**
+ * Componente principal que muestra la lista de usuarios y permite agregar nuevos usuarios.
+ * @component
+ * @param {Object} props - Propiedades del componente.
+ * @returns {JSX.Element} JSX para renderizar la página de inicio.
+ */
 const Inicio = (props) => {
+<<<<<<< HEAD
+  // Estado y funciones para el modal de agregar usuario
+=======
   const [datos, Setdatos] = useState([]);
   const [Editar, setEditar] = useState(null);
   const { form, cambiar } = HelperForm({});
@@ -123,6 +132,7 @@ const Inicio = (props) => {
     });
   };
 
+>>>>>>> c952e302e1aad699223802829b6f2720e06407ff
   const [show2, setShow2] = useState(false);
   const handleClose2 = () => {
     setShow2(false);

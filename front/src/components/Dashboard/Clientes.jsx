@@ -4,7 +4,13 @@ import Swal2 from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 const Swal = withReactContent(Swal2);
-
+/**
+ * Componente para gestionar la información de clientes.
+ *
+ * @component
+ * @param {Object} props - Propiedades del componente.
+ * @returns {JSX.Element} - Elemento JSX que representa la página de clientes.
+ */
 const Clientes = (props) => {
   const [datos, SetDatos] = useState([]);
   const [Editar, setEditar] = useState(null);
@@ -26,6 +32,12 @@ const Clientes = (props) => {
     ListarCliente();
   }, []);
 
+  /**
+   * Función para eliminar un cliente.
+   *
+   * @param {number} id - Identificador del cliente.
+   * @param {string} nombre - Nombre del cliente.
+   */
   const Eliminar = (id, nombre) => {
     Swal.fire({
       title: `¿Desea eliminar el cliente ${nombre}?`,

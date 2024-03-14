@@ -7,6 +7,12 @@ import { useNavigate } from "react-router-dom";
 
 const MySwal = withReactContent(Swal2);
 
+/**
+ * Componente de barra de navegación principal.
+ *
+ * @component
+ * @returns {JSX.Element} El componente de la barra de navegación.
+ */
 const Navbar = () => {
   const Navigate = useNavigate();
   const CerraSesion = () => {

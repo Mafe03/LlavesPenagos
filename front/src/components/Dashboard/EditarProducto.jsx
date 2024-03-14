@@ -1,6 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+<<<<<<< HEAD
+/**
+ * Componente para editar un producto mediante un modal.
+ * @component
+ * @param {Object} props - Propiedades del componente.
+ * @param {boolean} show - Indica si el modal debe mostrarse o no.
+ * @param {function} handleClose - Función para cerrar el modal.
+ * @returns {JSX.Element} JSX para renderizar el modal de edición de productos.
+ */
+const EditarProducto = (props, show, handleClose) => {
+=======
 import HelperForm from "../../helper/HelperForm";
 import Swal2 from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -101,6 +112,7 @@ const EditarProducto = ({
     }
   };
 
+>>>>>>> c952e302e1aad699223802829b6f2720e06407ff
   return (
     <>
       <Modal

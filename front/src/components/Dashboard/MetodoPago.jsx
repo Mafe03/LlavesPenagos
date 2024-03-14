@@ -5,6 +5,20 @@ import Swal2 from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import EditarMetodoPago from "./EditarMetodoPago";
 
+<<<<<<< HEAD
+/**
+ * Componente que representa la página de Métodos de Pago en el panel de administración.
+ * Muestra información relacionada con los métodos de pago disponibles.
+ *
+ * @component
+ * @example
+ * // Uso del componente en una ruta específica
+ * <Route path="/metodo-pago" element={<MetodoPago />} />
+ *
+ * @returns {JSX.Element} El componente de la página de Métodos de Pago.
+ */
+const MetodoPago = () => {
+=======
 const Swal = withReactContent(Swal2);
 
 const MetodoPago = (props) => {
@@ -110,6 +124,7 @@ const MetodoPago = (props) => {
   const handleShow = () => {
     setShow(true);
   };
+>>>>>>> c952e302e1aad699223802829b6f2720e06407ff
   return (
     <>
       <Modal

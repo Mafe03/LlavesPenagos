@@ -6,6 +6,18 @@ import Swal2 from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 const Swal = withReactContent(Swal2);
 
+/**
+ * Componente para editar la información de una categoría mediante un modal.
+ *
+ * @component
+ * @param {Object} props - Propiedades del componente.
+ * @param {boolean} props.show - Indica si el modal debe mostrarse.
+ * @param {Function} props.handleClose - Función para cerrar el modal.
+ * @param {number} props.id - Identificador de la categoría.
+ * @param {string} props.categoria - Nombre actual de la categoría.
+ * @param {Function} props.setEditar - Función para establecer el estado de edición.
+ * @param {Function} props.listarCategoria - Función para listar las categorías.
+ */
 const EditarCategoria = ({
   props,
   show,
